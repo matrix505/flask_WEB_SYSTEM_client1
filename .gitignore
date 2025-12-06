@@ -53,3 +53,5 @@ htmlcov/
 *.pem
 *.key
 secrets.py
+
+discord_webhook.py
