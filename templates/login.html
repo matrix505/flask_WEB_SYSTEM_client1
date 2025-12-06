@@ -4,31 +4,34 @@
 
 {% block content %}
 <div class="auth-container">
-    <div class="auth-box">
-        <div class="auth-header">
-            <i class="fas fa-user-circle"></i>
-            <h2>Login</h2>
-            <p>Please login to continue.</p>
+    <div class="auth-card">
+        <div class="auth-card-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your account</p>
         </div>
         
         <form method="POST" action="{{ url_for('login') }}" class="auth-form">
-            <div class="form-group">
-                <label for="username"><i class="fas fa-user"></i> Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
             </div>
             
-            <div class="form-group">
-                <label for="password"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block">
-                <i class="fas fa-sign-in-alt"></i> Login
+            <button type="submit" class="auth-btn">
+                Sign In
             </button>
         </form>
         
-        <div class="auth-footer">
-            <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+        <div class="auth-divider">
+            <span>or</span>
+        </div>
+        
+        <div class="auth-link">
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
         </div>
     </div>
 </div>
