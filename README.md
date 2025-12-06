@@ -1,6 +1,6 @@
 # Web - Personal Website with Flask
 
-A personal blog and website built with Python Flask. This project includes user authentication, admin panel, and profile management.
+A personal blog and website built with Python Flask. This project includes user authentication, admin panel, profile management, and a dynamic homepage showcasing the site owner.
 
 ---
 
@@ -13,8 +13,11 @@ A personal blog and website built with Python Flask. This project includes user 
 - **User Dashboard** - Personal dashboard with profile information
 - **Profile Management** - Users can update their personal info
 - **Games Page** - Reserved games section for verified users
-- **Content Editor** - Admin can edit homepage content and profile image
+- **Homepage Content Editor** - Admin can edit homepage text content
+- **Dynamic Owner Info** - Homepage displays admin's profile (name, email, birthday) from database
+- **Profile Image Upload** - Admin can upload profile image for homepage
 - **Responsive Design** - Mobile-friendly layout with hamburger menu
+- **Magenta & Black Theme** - Modern color scheme throughout
 
 ---
 
@@ -45,10 +48,11 @@ Or download and extract the ZIP file.
 
 ### Step 3: Install Python Dependencies
 
-Open terminal/command prompt in the project folder and run:
+Open terminal/command prompt in the project folder and run (Make sure to download python lib):
 
 ```
 pip install -r requirements.txt
+or python -m pip install -r requirements.txt
 ```
 
 This will install:
@@ -190,4 +194,4 @@ EMAIL_CONFIG = {
 ## Created By
 
 2nd Year Computer Science Student  
-December 2024
+December 2025
