@@ -45,6 +45,11 @@ def verify_login(username, password):
             return user
     return None
 
+def get_admin_user():
+    """Get the first admin user for homepage display"""
+    query = "SELECT * FROM users WHERE role = 'admin' LIMIT 1"
+    return execute_one(query)
+
 def get_all_users():
     """Get all users from database"""
     query = "SELECT * FROM users ORDER BY id DESC"

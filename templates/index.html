@@ -3,60 +3,55 @@
 {% block title %}Home - MyBlog{% endblock %}
 
 {% block content %}
-<div class="home-container">
-    <div class="profile-card">
-        <div class="profile-card-header">
-            <div class="profile-avatar">
-                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
-            </div>
-            <div class="profile-status online"></div>
+<div class="home-hero">
+    <div class="hero-content">
+        <h1 class="hero-title">{{ content.get('site_title', 'Welcome to my Website!') }}</h1>
+    </div>
+</div>
+
+<div class="home-main">
+    <div class="owner-card">
+        <div class="owner-image">
+            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
         </div>
-        
-        <div class="profile-card-body">
-            <h1 class="profile-name">
-                {% if user %}
-                    {{ user.firstname }} {{ user.lastname }}
-                {% else %}
-                    {{ content.get('site_title', 'Welcome!') }}
-                {% endif %}
-            </h1>
-            <p class="profile-tagline">{{ content.get('tagline', 'Hello! I am a passionate developer.') }}</p>
-            
-            <div class="profile-bio">
-                <p>{{ content.get('about_me', 'I enjoy learning new technologies and creating web applications.') }}</p>
-            </div>
-            
-            <div class="profile-dream">
-                <div class="dream-icon">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div class="dream-text">
-                    <span class="dream-label">{{ content.get('dream_job_title', 'My Dream Job') }}</span>
-                    <span class="dream-value">{{ content.get('dream_job_text', 'Full-Stack Web Developer!') }}</span>
-                </div>
-            </div>
+        <h2 class="owner-name">{% if admin %}{{ admin.firstname }} {{ admin.lastname }}{% else %}Admin{% endif %}</h2>
+        <p class="owner-quote">"{{ content.get('tagline', 'Hello! I am a passionate developer.') }}"</p>
+        {% if admin %}
+        <div class="owner-info">
+            <span><i class="fas fa-envelope"></i> {{ admin.email }}</span>
+            <span><i class="fas fa-birthday-cake"></i> {{ admin.birthday }}</span>
         </div>
-        
-        <div class="profile-card-footer">
-            {% if not session.get('loggedIn') %}
-                <a href="{{ url_for('login') }}" class="btn-card btn-login">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </a>
-                <a href="{{ url_for('register') }}" class="btn-card btn-register">
-                    <i class="fas fa-user-plus"></i> Register
-                </a>
-            {% else %}
-                <a href="{% if session.get('role') == 'admin' %}{{ url_for('admin_dashboard') }}{% else %}{{ url_for('user_dashboard') }}{% endif %}" class="btn-card btn-dashboard">
-                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
-                </a>
-            {% endif %}
+        {% endif %}
+    </div>
+    
+    <div class="about-section">
+        <h3><i class="fas fa-user"></i> About Me</h3>
+        <p>{{ content.get('about_me', 'I enjoy learning new technologies and creating web applications.') }}</p>
+    </div>
+    
+    <div class="dream-card">
+        <div class="dream-icon">
+            <i class="fas fa-rocket"></i>
+        </div>
+        <div class="dream-info">
+            <span class="dream-label">{{ content.get('dream_job_title', 'My Dream Job') }}</span>
+            <span class="dream-value">{{ content.get('dream_job_text', 'Full-Stack Web Developer!') }}</span>
         </div>
     </div>
     
-    <div class="social-links">
-        <a href="#" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="#" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+    {% if not session.get('loggedIn') %}
+    <div class="games-promo">
+        <div class="promo-icon">
+            <i class="fas fa-gamepad"></i>
+        </div>
+        <div class="promo-content">
+            <h3>Unlock Exclusive Games!</h3>
+            <p>Register now to access our collection of fun and exciting games. Join our community and start playing today!</p>
+            <a href="{{ url_for('register') }}" class="btn btn-promo">
+                <i class="fas fa-user-plus"></i> Register for Free
+            </a>
+        </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

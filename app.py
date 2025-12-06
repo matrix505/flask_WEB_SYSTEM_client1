@@ -49,7 +49,8 @@ def index():
     if session.get('loggedIn'):
         user = models.get_user_by_id(session.get('user_id'))
     content = models.get_site_content()
-    return render_template('index.html', user=user, content=content)
+    admin = models.get_admin_user()
+    return render_template('index.html', user=user, content=content, admin=admin)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

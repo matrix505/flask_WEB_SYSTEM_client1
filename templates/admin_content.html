@@ -40,7 +40,7 @@
         </div>
         
         <div class="profile-form-container" style="margin-bottom: 20px;">
-            <h3 style="margin-bottom: 15px; color: #2c3e50;"><i class="fas fa-image"></i> Profile Image</h3>
+            <h3 style="margin-bottom: 15px; color: #1a1a1a;"><i class="fas fa-image"></i> Profile Image</h3>
             <form method="POST" action="{{ url_for('admin_upload_profile') }}" enctype="multipart/form-data" class="profile-form" data-confirm="Upload new profile image?" data-title="Update Image">
                 <div class="form-group">
                     <label for="profile_image"><i class="fas fa-camera"></i> Select Image (PNG, JPG, JPEG)</label>
@@ -56,20 +56,20 @@
         </div>
         
         <div class="profile-form-container">
-            <h3 style="margin-bottom: 15px; color: #2c3e50;"><i class="fas fa-file-alt"></i> Homepage Text Content</h3>
+            <h3 style="margin-bottom: 15px; color: #1a1a1a;"><i class="fas fa-file-alt"></i> Homepage Text Content</h3>
             <form method="POST" action="{{ url_for('admin_content') }}" class="profile-form" data-confirm="Save changes to homepage?" data-title="Update Content">
                 <div class="form-group">
                     <label for="site_title"><i class="fas fa-heading"></i> Site Title</label>
-                    <input type="text" id="site_title" name="site_title" value="{{ content.get('site_title', '') }}" placeholder="Welcome to MyBlog!">
+                    <input type="text" id="site_title" name="site_title" value="{{ content.get('site_title', '') }}" placeholder="Welcome to my Website!">
                 </div>
                 
                 <div class="form-group">
-                    <label for="tagline"><i class="fas fa-quote-left"></i> Tagline</label>
+                    <label for="tagline"><i class="fas fa-quote-left"></i> Quote / Tagline</label>
                     <input type="text" id="tagline" name="tagline" value="{{ content.get('tagline', '') }}" placeholder="Hello! I am a passionate developer.">
                 </div>
                 
                 <div class="form-group">
-                    <label for="about_me"><i class="fas fa-user"></i> About Me</label>
+                    <label for="about_me"><i class="fas fa-info-circle"></i> About Me / Description</label>
                     <textarea id="about_me" name="about_me" rows="4" class="form-textarea" placeholder="Write something about yourself...">{{ content.get('about_me', '') }}</textarea>
                 </div>
                 
