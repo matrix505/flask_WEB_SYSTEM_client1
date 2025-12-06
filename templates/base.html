@@ -23,8 +23,7 @@
             {% if session.get('loggedIn') %}
                 {% if session.get('role') == 'admin' %}
                     <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                    <a href="{{ url_for('profile') }}"><i class="fas fa-user"></i> Profile</a>
-                    <a href="{{ url_for('logout') }}" data-confirm="Are you sure you want to logout?" data-title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    <a href="{{ url_for('games') }}" class="nav-games-btn"><i class="fas fa-gamepad"></i> Games</a>
                 {% else %}
                     <a href="{{ url_for('user_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     <a href="{{ url_for('games') }}" class="nav-games-btn"><i class="fas fa-gamepad"></i> Games</a>

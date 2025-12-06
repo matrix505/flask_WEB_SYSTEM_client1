@@ -795,6 +795,7 @@ a {
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .dashboard-sidebar {
@@ -805,7 +806,7 @@ a {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     height: fit-content;
     position: sticky;
-    top: 80px;
+    top: 90px;
 }
 
 .sidebar-header {
@@ -974,16 +975,26 @@ a {
     border-bottom: 1px solid #f0f0f0;
 }
 
+.users-table-section {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
 .data-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    min-width: 600px;
 }
 
 .data-table th, .data-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #f0f0f0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
 }
 
 .data-table th {
@@ -1269,12 +1280,28 @@ a {
         grid-template-columns: 1fr;
     }
     
+    .users-table-section {
+        margin: 0 -15px;
+        padding: 0 15px;
+    }
+    
     .data-table {
-        font-size: 13px;
+        font-size: 12px;
+        min-width: 500px;
     }
     
     .data-table th, .data-table td {
-        padding: 8px 10px;
+        padding: 8px 6px;
+        max-width: 100px;
+    }
+    
+    .data-table td:nth-child(3),
+    .data-table td:nth-child(4) {
+        max-width: 80px;
+    }
+    
+    .action-buttons {
+        flex-wrap: nowrap;
     }
     
     .auth-box {
