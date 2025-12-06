@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - MyBlog{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="profile-card">
+        <div class="profile-card-header">
+            <div class="profile-avatar">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
+            </div>
+            <div class="profile-status online"></div>
+        </div>
+        
+        <div class="profile-card-body">
+            <h1 class="profile-name">
+                {% if user %}
+                    {{ user.firstname }} {{ user.lastname }}
+                {% else %}
+                    {{ content.get('site_title', 'Welcome!') }}
+                {% endif %}
+            </h1>
+            <p class="profile-tagline">{{ content.get('tagline', 'Hello! I am a passionate developer.') }}</p>
+            
+            <div class="profile-bio">
+                <p>{{ content.get('about_me', 'I enjoy learning new technologies and creating web applications.') }}</p>
+            </div>
+            
+            <div class="profile-dream">
+                <div class="dream-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="dream-text">
+                    <span class="dream-label">{{ content.get('dream_job_title', 'My Dream Job') }}</span>
+                    <span class="dream-value">{{ content.get('dream_job_text', 'Full-Stack Web Developer!') }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-card-footer">
+            {% if not session.get('loggedIn') %}
+                <a href="{{ url_for('login') }}" class="btn-card btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="{{ url_for('register') }}" class="btn-card btn-register">
+                    <i class="fas fa-user-plus"></i> Register
+                </a>
+            {% else %}
+                <a href="{% if session.get('role') == 'admin' %}{{ url_for('admin_dashboard') }}{% else %}{{ url_for('user_dashboard') }}{% endif %}" class="btn-card btn-dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="social-links">
+        <a href="#" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+</div>
+{% endblock %}

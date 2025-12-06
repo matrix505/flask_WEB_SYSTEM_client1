@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - MyBlog{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-box auth-box-wide">
+        <div class="auth-header">
+            <i class="fas fa-user-plus"></i>
+            <h2>Create Account</h2>
+            <p>Fill in the form below to create your account.</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstname"><i class="fas fa-user"></i> First Name *</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Joshua" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="middlename"><i class="fas fa-user"></i> Middle Name</label>
+                    <input type="text" id="middlename" name="middlename" placeholder="Mendoza">
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastname"><i class="fas fa-user"></i> Last Name *</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Dela Cruz" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email *</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact"><i class="fas fa-phone"></i> Contact Number *</label>
+                    <input type="text" id="contact" name="contact" placeholder="09123456789" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="birthday"><i class="fas fa-calendar"></i> Birthday *</label>
+                    <input type="date" id="birthday" name="birthday" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-at"></i> Username *</label>
+                    <input type="text" id="username" name="username" placeholder="juandelacruz" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password"><i class="fas fa-lock"></i> Confirm Password *</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-paper-plane"></i> Register
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple form validation
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirm_password').value;
+        
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+        }
+        
+        if (password.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters!');
+        }
+    });
+</script>
+{% endblock %}
