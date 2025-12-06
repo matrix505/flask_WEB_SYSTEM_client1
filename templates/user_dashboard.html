@@ -18,12 +18,6 @@
             <a href="{{ url_for('profile') }}" class="nav-item">
                 <i class="fas fa-user-edit"></i> My Profile
             </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-gamepad"></i> Games
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-cog"></i> Settings
-            </a>
             <a href="{{ url_for('logout') }}" class="nav-item" data-confirm="Are you sure you want to logout?" data-title="Logout">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </a>
@@ -55,18 +49,7 @@
                 <div class="card-content">
                     <h3>Games</h3>
                     <p>Play fun games and have a good time!</p>
-                    <a href="#" class="btn btn-sm">Coming Soon</a>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-cog"></i>
-                </div>
-                <div class="card-content">
-                    <h3>Settings</h3>
-                    <p>Configure your account settings.</p>
-                    <a href="#" class="btn btn-sm">Coming Soon</a>
+                    <a href="{{ url_for('games') }}" class="btn btn-sm">Play Games</a>
                 </div>
             </div>
         </div>

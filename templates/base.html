@@ -14,17 +14,21 @@
                 No name yet
             </a>
         </div>
-        <div class="nav-links">
+        <button class="nav-toggle" onclick="toggleNav()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a>
 
             {% if session.get('loggedIn') %}
                 {% if session.get('role') == 'admin' %}
                     <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="{{ url_for('profile') }}"><i class="fas fa-user"></i> Profile</a>
+                    <a href="{{ url_for('logout') }}" data-confirm="Are you sure you want to logout?" data-title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 {% else %}
                     <a href="{{ url_for('user_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="{{ url_for('games') }}" class="nav-games-btn"><i class="fas fa-gamepad"></i> Games</a>
                 {% endif %}
-                <a href="{{ url_for('profile') }}"><i class="fas fa-user"></i> Profile</a>
-                <a href="{{ url_for('logout') }}" data-confirm="Are you sure you want to logout?" data-title="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             {% else %}
                 <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
                 <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
@@ -68,7 +72,7 @@
     </div>
 
     <script>
-        // Confirmation Modal Functions
+        // confirmation
         function showConfirm(title, message, onConfirm, confirmBtnClass) {
             var modal = document.getElementById('confirmModal');
             document.getElementById('modalTitle').textContent = title;
@@ -130,6 +134,12 @@
                 setTimeout(function() { msg.remove(); }, 500);
             });
         }, 5000);
+        
+        // Toggle mobile navigation
+        function toggleNav() {
+            var navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('nav-active');
+        }
     </script>
 </body>
 </html>

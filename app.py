@@ -256,6 +256,12 @@ def profile():
     
     return render_template('profile.html', user=user)
 
+@app.route('/games')
+@login_required
+def games():
+    """Games page - only for verified users"""
+    return render_template('games.html')
+
 # ============ ADMIN ROUTES ============
 
 @app.route('/admin/dashboard')
@@ -355,7 +361,7 @@ def admin_edit_user(user_id):
                 flash(error, 'error')
             return render_template('admin_edit_user.html', user=user)
         
-        # Update user
+        
         models.admin_update_user(user_id, username, email, firstname, middlename, 
                                  lastname, birthday, contact, role)
         
@@ -368,7 +374,7 @@ def admin_edit_user(user_id):
 @admin_required
 def admin_delete_user(user_id):
     """Admin delete user"""
-    # Don't allow deleting yourself
+    # don't allow admin to delete themselves
     if user_id == session.get('user_id'):
         flash('You cannot delete yourself!', 'error')
         return redirect(url_for('admin_users'))
@@ -440,7 +446,7 @@ def admin_upload_profile():
     
     return redirect(url_for('admin_content'))
 
-# ============ ERROR HANDLERS ============
+# error page
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -449,4 +455,4 @@ def page_not_found(e):
 # ============ RUN APP ============
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

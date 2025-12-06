@@ -91,6 +91,16 @@ a {
     margin-right: 8px;
 }
 
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
 .nav-links {
     display: flex;
     gap: 10px;
@@ -110,6 +120,20 @@ a {
 
 .nav-links a i {
     margin-right: 5px;
+}
+
+.nav-links .nav-games-btn {
+    background: linear-gradient(135deg, #9b59b6, #e74c3c);
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-links .nav-games-btn:hover {
+    background: linear-gradient(135deg, #8e44ad, #c0392b);
+}
+
+.nav-links .nav-games-btn i {
+    color: #f1c40f;
 }
 
 /* Flash messages */
@@ -893,17 +917,87 @@ a {
     font-size: 14px;
 }
 
+/* Games Page */
+.games-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.games-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.games-header h1 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.games-header h1 i {
+    color: #9b59b6;
+    margin-right: 10px;
+}
+
+.games-header p {
+    color: #666;
+}
+
+.games-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+.coming-soon-box {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.coming-soon-box i {
+    color: #9b59b6;
+    margin-bottom: 20px;
+}
+
+.coming-soon-box h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.coming-soon-box p {
+    color: #666;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        gap: 10px;
+        flex-wrap: wrap;
         padding: 10px 15px;
     }
     
+    .nav-toggle {
+        display: block;
+    }
+    
     .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #34495e;
+    }
+    
+    .nav-links.nav-active {
+        display: flex;
+    }
+    
+    .nav-links a {
+        text-align: center;
+        padding: 10px;
     }
     
     .dashboard-container {
