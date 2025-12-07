@@ -3,6 +3,20 @@ import mysql.connector
 from config import DB_CONFIG
 import hashlib
 
+
+## CHANGE THESE ACCOUNTS AS NEEDED ##
+
+ADMIN_ACC = {
+    "username": "admin", #change
+    "password": "admin123", #change 
+}
+TEST_ACC = {
+    "username": "testuser", #change
+    "password": "user123", #change
+}
+
+##
+
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
@@ -93,23 +107,23 @@ def setup_database():
     print("Tables created successfully!")
     
     # Create admin user
-    admin_password = hash_password('admin123')
+    admin_password = hash_password(ADMIN_ACC["password"])
     try:
         cursor.execute("""
             INSERT INTO users (username, password, email, firstname, middlename, lastname, birthday, contact, role, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, ('admin', admin_password, 'admin@example.com', 'Admin', '', 'User', '2000-01-01', '09123456789', 'admin', 1))
+        """, (ADMIN_ACC["username"], admin_password, 'admin@example.com', 'Admin', '', 'User', '2000-01-01', '09123456789', 'admin', 1))
         print("Admin user created! Username: admin, Password: admin123")
     except mysql.connector.IntegrityError:
         print("Admin user already exists!")
     
     # Create test user
-    user_password = hash_password('user123')
+    user_password = hash_password(TEST_ACC["password"])
     try:
         cursor.execute("""
             INSERT INTO users (username, password, email, firstname, middlename, lastname, birthday, contact, role, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, ('testuser', user_password, 'user@example.com', 'Juan', 'Santos', 'Dela Cruz', '2003-05-15', '09987654321', 'user', 1))
+        """, (TEST_ACC["username"], user_password, 'user@example.com', 'Juan', 'Santos', 'Dela Cruz', '2003-05-15', '09987654321', 'user', 1))
         print("Test user created! Username: testuser, Password: user123")
     except mysql.connector.IntegrityError:
         print("Test user already exists!")
