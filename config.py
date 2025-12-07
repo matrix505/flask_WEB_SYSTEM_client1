@@ -1,10 +1,9 @@
-# config.py - Database and App Configuration
 import os
 
-# Flask App Configuration
+
 SECRET_KEY = 'my_secret_key_12345'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-# Database Configuration for XAMPP MySQL
+
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
@@ -16,8 +15,8 @@ DB_CONFIG = {
 EMAIL_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
-    'email': 'matthewsuarez40@gmail.com',
-    'password': 'izfhgluxowcgundp'
+    'email': '',
+    'password': ''
 }
 
 # OTP Settings

@@ -4,46 +4,34 @@ from config import DB_CONFIG
 import hashlib
 
 
-## CHANGE THESE ACCOUNTS AS NEEDED ##
-
-ADMIN_ACC = {
-    "username": "admin", #change
-    "password": "admin123", #change 
-}
-TEST_ACC = {
-    "username": "testuser", #change
-    "password": "user123", #change
-}
-
-##
-
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
 def setup_database():
-    # First connect without database to create it
-    conn = mysql.connector.connect(
-        host=DB_CONFIG['host'],
-        user=DB_CONFIG['user'],
-        password=DB_CONFIG['password']
-    )
-    cursor = conn.cursor()
     
-    # Create database
-    cursor.execute("CREATE DATABASE IF NOT EXISTS flask_blog_db")
-    print("Database created successfully!")
-    
-    cursor.close()
-    conn.close()
-    
-    # Now connect to the database
-    conn = mysql.connector.connect(
-        host=DB_CONFIG['host'],
-        user=DB_CONFIG['user'],
-        password=DB_CONFIG['password'],
-        database=DB_CONFIG['database']
-    )
-    cursor = conn.cursor()
+    try:
+        conn = mysql.connector.connect(
+            host=DB_CONFIG['host'],
+            user=DB_CONFIG['user'],
+            password=DB_CONFIG['password']
+        )
+        cursor = conn.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS flask_blog_db")
+        print("Database created successfully!")
+        cursor.close()
+        conn.close()
+    except mysql.connector.Error as err:
+        print(f"Error creating database: {err}")
+        return
+
+    try:
+        conn = mysql.connector.connect(
+            host=DB_CONFIG['host'],
+            user=DB_CONFIG['user'],
+            password=DB_CONFIG['password'],
+            database=DB_CONFIG['database']
+        )
+        cursor = conn.cursor()
+    except mysql.connector.Error as err:
+        print(f"Error connecting to database: {err}")
+        return
     
     # Create tables
     tables = [
@@ -107,23 +95,22 @@ def setup_database():
     print("Tables created successfully!")
     
     # Create admin user
-    admin_password = hash_password(ADMIN_ACC["password"])
+    admin_password = hash_password(ACCOUNTS["admin_password"])
     try:
         cursor.execute("""
             INSERT INTO users (username, password, email, firstname, middlename, lastname, birthday, contact, role, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, (ADMIN_ACC["username"], admin_password, 'admin@example.com', 'Admin', '', 'User', '2000-01-01', '09123456789', 'admin', 1))
+        """, (ACCOUNTS["admin"], admin_password, 'admin@example.com', 'Admin', '', 'User', '2000-01-01', '09123456789', 'admin', 1))
         print("Admin user created! Username: admin, Password: admin123")
     except mysql.connector.IntegrityError:
         print("Admin user already exists!")
     
-    # Create test user
-    user_password = hash_password(TEST_ACC["password"])
+    user_password = hash_password(ACCOUNTS["testuser_password"])
     try:
         cursor.execute("""
             INSERT INTO users (username, password, email, firstname, middlename, lastname, birthday, contact, role, is_active)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, (TEST_ACC["username"], user_password, 'user@example.com', 'Juan', 'Santos', 'Dela Cruz', '2003-05-15', '09987654321', 'user', 1))
+        """, (ACCOUNTS["testuser"], user_password, 'user@example.com', 'Juan', 'Santos', 'Dela Cruz', '2003-05-15', '09987654321', 'user', 1))
         print("Test user created! Username: testuser, Password: user123")
     except mysql.connector.IntegrityError:
         print("Test user already exists!")
@@ -153,6 +140,15 @@ def setup_database():
     
     print("\n=== Database setup complete! ===")
     print("You can now run the app with: python app.py")
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+ACCOUNTS = {
+    "admin": "admin",
+    "testuser": "testuser",
+    "admin_password": "admin123",
+    "testuser_password": "user123"
+}
 
 if __name__ == '__main__':
     print("Setting up database...")
