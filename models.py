@@ -1,4 +1,4 @@
-# models.py - User Model and Database Operations
+
 from database import execute_query, execute_one
 from datetime import datetime
 import hashlib
@@ -7,7 +7,6 @@ def hash_password(password):
     """Simple password hashing"""
     return hashlib.sha256(password.encode()).hexdigest()
 
-# ============ USER OPERATIONS ============
 
 def create_user(username, password, email, firstname, middlename, lastname, 
                 birthday, contact, role='user'):
@@ -87,7 +86,6 @@ def admin_update_user(user_id, username, email, firstname, middlename, lastname,
               contact, role, user_id)
     return execute_query(query, params)
 
-# ============ OTP OPERATIONS ============
 
 def save_otp(email, otp_code):
     """Save OTP to database"""
@@ -130,7 +128,6 @@ def log_email_sent(email):
     query = "INSERT INTO email_log (email, sent_at) VALUES (%s, NOW())"
     return execute_query(query, (email,))
 
-# ============ PENDING REGISTRATION ============
 
 def save_pending_registration(username, password, email, firstname, middlename, 
                               lastname, birthday, contact):
@@ -173,8 +170,6 @@ def complete_registration(email):
         
         return result
     return None
-
-# ============ SITE CONTENT OPERATIONS ============
 
 def get_site_content():
     """Get all site content as dictionary"""

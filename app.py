@@ -17,7 +17,6 @@ app.secret_key = SECRET_KEY
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# ============ DECORATORS ============
 
 def login_required(f):
     """Decorator to check if user is logged in"""
@@ -42,7 +41,6 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# ============ PUBLIC ROUTES ============
 
 @app.route('/')
 def index():
@@ -210,7 +208,6 @@ def resend_otp():
     flash('New OTP has been sent!', 'success')
     return redirect(url_for('verify_otp'))
 
-# ============ ADMIN ROUTES ============
 
 @app.route('/admin/dashboard')
 @admin_required
@@ -218,7 +215,6 @@ def admin_dashboard():
     """Admin dashboard"""
     return render_template('admin_dashboard.html')
 
-# ============ RUN APP ============
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
