@@ -13,7 +13,7 @@ def setup_database():
             password=DB_CONFIG['password']
         )
         cursor = conn.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS flask_blog_db")
+        cursor.execute("CREATE DATABASE IF NOT EXISTS my_flask_db_web")
         print("Database created successfully!")
         cursor.close()
         conn.close()

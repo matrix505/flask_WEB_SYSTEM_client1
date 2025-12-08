@@ -6,8 +6,10 @@ import os
 import time
 from email_helper import generate_otp, send_otp_email
 from config import SECRET_KEY,ALLOWED_EXTENSIONS
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+load_dotenv()
 app.secret_key = SECRET_KEY
 
 

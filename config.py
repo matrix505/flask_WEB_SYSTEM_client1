@@ -1,23 +1,20 @@
 import os
 
-
-SECRET_KEY = 'my_secret_key_12345'
+SECRET_KEY = 'my_secret_12345'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',  # 
-    'database': 'flask_blog_db'
+    'host': os.getenv('DB_HOST'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'), 
+    'database': os.getenv('DB_NAME', 'my_flask_db_web')
 }
 
-# Email Configuration (use your own email settings)
+
 EMAIL_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
-    'email': '',
-    'password': ''
+    'email': os.getenv('EMAIL_USER'),
+    'password': os.getenv('EMAIL_PASSWORD')
 }
-
-# OTP Settings
 OTP_EXPIRY_MINUTES = 5
