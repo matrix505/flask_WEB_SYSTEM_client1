@@ -15,6 +15,7 @@ EMAIL_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
     'email': os.getenv('EMAIL_USER'),
-    'password': os.getenv('EMAIL_PASSWORD')
+    'password': os.getenv('EMAIL_PASSWORD'),
+    "authorized_senders": "Blog web owner"
 }
 OTP_EXPIRY_MINUTES = 5

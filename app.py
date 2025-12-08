@@ -2,14 +2,16 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from functools import wraps
 import models
+from dotenv import load_dotenv
+load_dotenv()
 import os
 import time
-from email_helper import generate_otp, send_otp_email
+from email_smtp import generate_otp, send_otp_email
 from config import SECRET_KEY,ALLOWED_EXTENSIONS
-from dotenv import load_dotenv
+
 
 app = Flask(__name__)
-load_dotenv()
+
 app.secret_key = SECRET_KEY
 
 
@@ -17,7 +19,7 @@ app.secret_key = SECRET_KEY
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# ============ DECORATORS ============
+# require login decorator
 
 def login_required(f):
     """Decorator to check if user is logged in"""
@@ -42,8 +44,6 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# ============ PUBLIC ROUTES ============
-
 @app.route('/')
 def index():
     """Homepage"""
@@ -61,21 +61,18 @@ def login():
         if session.get('role') == 'admin':
             return redirect(url_for('admin_dashboard'))
         return redirect(url_for('user_dashboard'))
-    
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        
-        # Validate input
+        # Validate 
         if not username or not password:
             flash('Please fill all fields!', 'error')
             return render_template('login.html')
-        
-        # Verify credentials
+    
         user = models.verify_login(username, password)
         
         if user:
-            # Set session variables
+            # session
             session['loggedIn'] = True
             session['user_id'] = user['id']
             session['username'] = user['username']
@@ -84,7 +81,7 @@ def login():
             
             flash(f'Welcome back, {user["firstname"]}!', 'success')
             
-            # Redirect based on role
+            # Redirect depends on role
             if user['role'] == 'admin':
                 return redirect(url_for('admin_dashboard'))
             else:
@@ -108,7 +105,6 @@ def register():
         return redirect(url_for('index'))
     
     if request.method == 'POST':
-        # Get form data
         username = request.form.get('username')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
@@ -127,17 +123,12 @@ def register():
         
         if password != confirm_password:
             errors.append('Passwords do not match!')
-        
         if len(password) < 6:
             errors.append('Password must be at least 6 characters!')
-        
         if models.get_user_by_username(username):
             errors.append('Username already exists!')
-        
         if models.get_user_by_email(email):
             errors.append('Email already registered!')
-        
-        # Check for spam
         if models.check_email_spam(email):
             errors.append('Too many OTP requests. Please try again later.')
         

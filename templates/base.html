@@ -11,7 +11,7 @@
     <nav class="navbar">
         <div class="nav-brand">
             <a href="{{ url_for('index') }}">
-                No name yet
+                My website
             </a>
         </div>
         <button class="nav-toggle" onclick="toggleNav()">
@@ -91,7 +91,7 @@
             };
         }
         
-        // Handle confirm links (only <a> tags with data-confirm)
+     
         document.addEventListener('click', function(e) {
             var target = e.target.closest('a[data-confirm]');
             if (target && target.tagName === 'A') {
@@ -109,7 +109,7 @@
             }
         });
         
-        // Handle confirm forms (only on actual submit)
+       
         document.addEventListener('submit', function(e) {
             var form = e.target;
             if (form.tagName === 'FORM' && form.hasAttribute('data-confirm') && !form.hasAttribute('data-confirmed')) {
@@ -125,7 +125,7 @@
             }
         });
 
-        // Auto-hide flash messages after 5 seconds
+       
         setTimeout(function() {
             var flashMessages = document.querySelectorAll('.flash-message');
             flashMessages.forEach(function(msg) {
@@ -134,7 +134,7 @@
             });
         }, 5000);
         
-        // Toggle mobile navigation
+       
         function toggleNav() {
             var navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('nav-active');

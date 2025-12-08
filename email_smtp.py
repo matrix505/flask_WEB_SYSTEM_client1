@@ -1,4 +1,3 @@
-# email_helper.py - Email Sending Helper
 import smtplib
 import random
 from email.mime.text import MIMEText
@@ -10,33 +9,27 @@ def generate_otp():
     return str(random.randint(100000, 999999))
 
 def send_otp_email(to_email, otp_code):
-    """Send OTP to user's email"""
-    # Print OTP to console for testing (remove in production)
-    print(f"\n{'='*50}")
-    print(f"OTP Code for {to_email}: {otp_code}")
-    print(f"{'='*50}\n")
     
     try:
-        # Create message
+      
         msg = MIMEMultipart()
         msg['From'] = EMAIL_CONFIG['email']
         msg['To'] = to_email
-        msg['Subject'] = 'Your OTP Code - Flask Blog'
+        msg['Subject'] = 'Your OTP Code for Registration'
         
         body = f"""
-        Hello!
-        
-        Your OTP code for registration is: {otp_code}
+        Dear User,
+        Your OTP code for registration is: <h3>{otp_code}</h3>
         
         This code will expire in 5 minutes.
         
-        If you didn't request this code, please ignore this email.
+        <p style="color:red;">If you didn't request this code, please ignore this email.</p>
         
         Best regards,
-        Flask Blog Team
+        {EMAIL_CONFIG['authorized_senders']}
         """
         
-        msg.attach(MIMEText(body, 'plain'))
+        msg.attach(MIMEText(body, 'html'))
         
         # Connect and send
         server = smtplib.SMTP(EMAIL_CONFIG['smtp_server'], EMAIL_CONFIG['smtp_port'])

@@ -1,5 +1,7 @@
-# setup_database.py - Run this to create the database tables
+
 import mysql.connector
+from dotenv import load_dotenv
+load_dotenv()
 from config import DB_CONFIG
 import hashlib
 
@@ -7,13 +9,14 @@ import hashlib
 def setup_database():
     
     try:
+        
         conn = mysql.connector.connect(
             host=DB_CONFIG['host'],
             user=DB_CONFIG['user'],
             password=DB_CONFIG['password']
         )
         cursor = conn.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS my_flask_db_web")
+        cursor.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
         print("Database created successfully!")
         cursor.close()
         conn.close()
