@@ -1,7 +1,7 @@
 import os
 
 SECRET_KEY = 'my_secret_12345'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'} #  extensions for uploads
 
 DB_CONFIG = {
     'host': os.getenv('DB_HOST'),

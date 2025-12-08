@@ -365,57 +365,6 @@ a {
     color: #fff;
 }
 
-.games-promo {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    border-radius: 15px;
-    padding: 40px;
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.promo-icon {
-    width: 100px;
-    height: 100px;
-    background: linear-gradient(135deg, #e91e63 0%, #ff4081 100%);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.promo-icon i {
-    color: #fff;
-    font-size: 45px;
-}
-
-.promo-content h3 {
-    color: #fff;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.promo-content p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.btn-promo {
-    background: linear-gradient(135deg, #e91e63 0%, #ff4081 100%);
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.btn-promo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(233, 30, 99, 0.4);
-}
-
 /* ============ BUTTONS ============ */
 .btn {
     display: inline-flex;
@@ -491,20 +440,6 @@ a {
 .btn-sm {
     padding: 6px 12px;
     font-size: 13px;
-}
-
-.btn-xs {
-    padding: 4px 8px;
-    font-size: 12px;
-}
-
-.btn-edit {
-    background-color: #17a2b8;
-    color: #fff;
-}
-
-.btn-edit:hover {
-    background-color: #138496;
 }
 
 /* ===== Modern Minimalist Auth Pages ===== */
@@ -877,64 +812,6 @@ a {
     color: #666;
     font-size: 14px;
 }
-
-.dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-.card {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    border: 1px solid #e9ecef;
-    transition: border-color 0.2s;
-}
-
-.card:hover {
-    border-color: #e91e63;
-}
-
-.card-icon {
-    width: 45px;
-    height: 45px;
-    background-color: #e91e63;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.card-icon.admin-icon {
-    background-color: #1a1a1a;
-}
-
-.card-content h3 {
-    color: #1a1a1a;
-    margin-bottom: 5px;
-    font-size: 15px;
-}
-
-.card-content p {
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-.card-content .big-number {
-    font-size: 28px;
-    font-weight: bold;
-    color: #e91e63;
-}
-
 /* Badges */
 .badge {
     display: inline-block;
@@ -949,21 +826,6 @@ a {
     color: #fff;
 }
 
-.badge-user {
-    background-color: #e91e63;
-    color: #fff;
-}
-
-.badge-active {
-    background-color: #27ae60;
-    color: #fff;
-}
-
-.badge-inactive {
-    background-color: #e74c3c;
-    color: #fff;
-}
-
 /* Tables */
 .info-table {
     width: 100%;
@@ -973,157 +835,6 @@ a {
 .info-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #f0f0f0;
-}
-
-.users-table-section {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    min-width: 600px;
-}
-
-.data-table th, .data-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #f0f0f0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 150px;
-}
-
-.data-table th {
-    background: #f8f9fa;
-    font-weight: 600;
-    color: #333;
-}
-
-.data-table tr:hover {
-    background: #f8f9fa;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 5px;
-}
-
-.action-bar {
-    margin-bottom: 20px;
-}
-
-/* Profile form */
-.profile-form-container {
-    background-color: #f8f9fa;
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.profile-form .form-group {
-    margin-bottom: 15px;
-}
-
-.profile-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: #444;
-    font-weight: 600;
-    font-size: 13px;
-}
-
-.profile-form input, .profile-form select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: border-color 0.2s;
-}
-
-.profile-form textarea, .form-textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    font-family: inherit;
-    resize: vertical;
-    transition: border-color 0.2s;
-}
-
-.profile-form input:focus, .profile-form select:focus, .profile-form textarea:focus {
-    outline: none;
-    border-color: #e91e63;
-}
-
-.profile-form input:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-}
-
-.form-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-/* User info section */
-.user-info-section {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #e9ecef;
-}
-
-.user-info-section h3 {
-    color: #1a1a1a;
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
-/* Error page design */
-.error-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-}
-
-.error-content {
-    text-align: center;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.error-content i {
-    color: #f39c12;
-    margin-bottom: 15px;
-}
-
-.error-content h1 {
-    font-size: 60px;
-    color: #e91e63;
-    margin-bottom: 8px;
-}
-
-.error-content h2 {
-    color: #1a1a1a;
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
-
-.error-content p {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 14px;
 }
 
 /* Games Page */
@@ -1239,25 +950,6 @@ a {
         text-align: center;
     }
     
-    .games-promo {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 20px;
-    }
-    
-    .promo-icon {
-        width: 80px;
-        height: 80px;
-    }
-    
-    .promo-icon i {
-        font-size: 35px;
-    }
-    
-    .promo-content h3 {
-        font-size: 1.3rem;
-    }
-    
     .home-actions {
         flex-direction: column;
     }
@@ -1278,30 +970,6 @@ a {
     
     .form-row {
         grid-template-columns: 1fr;
-    }
-    
-    .users-table-section {
-        margin: 0 -15px;
-        padding: 0 15px;
-    }
-    
-    .data-table {
-        font-size: 12px;
-        min-width: 500px;
-    }
-    
-    .data-table th, .data-table td {
-        padding: 8px 6px;
-        max-width: 100px;
-    }
-    
-    .data-table td:nth-child(3),
-    .data-table td:nth-child(4) {
-        max-width: 80px;
-    }
-    
-    .action-buttons {
-        flex-wrap: nowrap;
     }
     
     .auth-box {
