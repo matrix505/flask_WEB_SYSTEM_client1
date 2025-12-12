@@ -10,7 +10,7 @@
         <p style="margin: 0; color: #666;">We sent a 6-digit code to <strong>{{ email }}</strong></p>
     </div>
 
-    <form method="POST" action="{{ url_for('verify_otp') }">
+    <form method="POST" action="{{ url_for('verify_otp') }}">
         <div style="margin-bottom: 20px;">
             <label for="otp" style="display: block; margin-bottom: 5px; font-weight: bold;">Enter OTP Code</label>
             <input type="text" id="otp" name="otp" placeholder="123456" maxlength="6" required
