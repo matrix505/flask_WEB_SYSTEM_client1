@@ -1,11 +1,13 @@
 # app.py - Main Flask Application
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from functools import wraps
 import models
 from dotenv import load_dotenv
 load_dotenv()
 import os
 import time
+import subprocess
+import sys
 from email_smtp import generate_otp, send_otp_email
 from config import SECRET_KEY,ALLOWED_EXTENSIONS
 
@@ -439,6 +441,38 @@ def admin_upload_profile():
         flash('Invalid file type! Please use PNG, JPG, or JPEG.', 'error')
     
     return redirect(url_for('admin_content'))
+
+# Game launch routes
+@app.route('/launch_game/<game_name>', methods=['POST'])
+@login_required
+def launch_game(game_name):
+    """Launch a tkinter game"""
+    try:
+        game_files = {
+            'snake': 'snake_game.py',
+            'guess_game': 'guess_game.py',
+            'memory_cards': 'memory_cards_game.py',
+            'tetris_blocks': 'tetris_blocks_game.py',
+            'space_shooter': 'space_shooter_game.py',
+            'color_memory': 'color_memory_game.py'
+        }
+
+        if game_name not in game_files:
+            return jsonify({'success': False, 'message': 'Game not found'})
+
+        game_file = game_files[game_name]
+        game_path = os.path.join(os.path.dirname(__file__), 'pygame', game_file)
+
+        if not os.path.exists(game_path):
+            return jsonify({'success': False, 'message': 'Game file not found'})
+
+        # Launch the game in a separate process
+        subprocess.Popen([sys.executable, game_path])
+
+        return jsonify({'success': True, 'message': f'{game_name} launched successfully'})
+
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)})
 
 # error page
 

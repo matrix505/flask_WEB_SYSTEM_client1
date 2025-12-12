@@ -8,23 +8,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd;">
+    <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; position: relative;">
+        <input type="checkbox" id="nav-toggle" style="display: none;">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
             <a href="{{ url_for('index') }}" style="font-weight: bold; text-decoration: none; color: #333;">My website</a>
-            <div style="display: flex; gap: 15px;">
-                <a href="{{ url_for('index') }}" style="text-decoration: none; color: #333;">Home</a>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+                {% if session.get('loggedIn') %}
+                <div class="dropdown">
+                    <button class="dropdown-btn">
+                        <i class="fas fa-user"></i> Account <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('profile') }}"><i class="fas fa-edit"></i> Edit Profile</a>
+                        <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <label for="nav-toggle" class="hamburger" style="cursor: pointer; font-size: 24px; color: #333; padding: 5px;">
+                    &#9776;
+                </label>
+            </div>
+
+            <div class="nav-links">
+                
+
+                <a href="{{ url_for('index') }}">Home</a>
 
                 {% if session.get('loggedIn') %}
+
+                <div class="mobile-dropdown" style="display: none;">
+                    <div class="mobile-dropdown-header">
+                        <i class="fas fa-user"></i> Account
+                    </div>
+                    <a href="{{ url_for('profile') }}"><i class="fas fa-edit"></i> Edit Profile</a>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
                     {% if session.get('role') == 'admin' %}
-                        <a href="{{ url_for('admin_dashboard') }}" style="text-decoration: none; color: #333;">Dashboard</a>
-                        <a href="{{ url_for('games') }}" style="text-decoration: none; color: #333;">Games</a>
+                        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                        <a href="{{ url_for('admin_users') }}">Manage Users</a>
+                        <a href="{{ url_for('admin_add_user') }}">Add User</a>
+                        <a href="{{ url_for('admin_content') }}">Edit Homepage</a>
+                        <a href="{{ url_for('games') }}">Games</a>
                     {% else %}
-                        <a href="{{ url_for('user_dashboard') }}" style="text-decoration: none; color: #333;">Dashboard</a>
-                        <a href="{{ url_for('games') }}" style="text-decoration: none; color: #333;">Games</a>
+                        <a href="{{ url_for('user_dashboard') }}">Dashboard</a>
+                        <a href="{{ url_for('games') }}">Games</a>
                     {% endif %}
                 {% else %}
-                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: #333;">Login</a>
-                    <a href="{{ url_for('register') }}" style="text-decoration: none; color: #333;">Register</a>
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
                 {% endif %}
             </div>
         </div>
@@ -128,12 +161,6 @@
                 setTimeout(function() { msg.remove(); }, 500);
             });
         }, 5000);
-        
-       
-        function toggleNav() {
-            var navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('nav-active');
-        }
     </script>
 </body>
 </html>

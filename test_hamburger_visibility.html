@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Test</title>
+    <style>
+        .hamburger {
+            display: none !important;
+            background: yellow;
+            padding: 10px;
+            border: 2px solid red;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block !important;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa;">
+            <a href="#">Brand</a>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <label for="nav-toggle" class="hamburger">☰ HAMBURGER</label>
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding: 20px;">
+        <h1>Test Hamburger Visibility</h1>
+        <p>Resize browser to < 768px to see hamburger menu.</p>
+        <p>On desktop (> 768px), hamburger should be hidden.</p>
+        <p>Current width: <span id="width"></span>px</p>
+    </div>
+
+    <script>
+        function updateWidth() {
+            document.getElementById('width').textContent = window.innerWidth;
+        }
+        updateWidth();
+        window.addEventListener('resize', updateWidth);
+    </script>
+</body>
+</html>

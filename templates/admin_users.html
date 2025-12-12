@@ -3,105 +3,65 @@
 {% block title %}Manage Users{% endblock %}
 
 {% block content %}
-<div class="dashboard-container">
-    <div class="dashboard-sidebar">
-        <div class="sidebar-header">
-            <i class="fas fa-user-shield fa-3x"></i>
-            <h3>{{ session.get('firstname') }}</h3>
-            <span class="badge badge-admin">Admin</span>
-        </div>
-        
-        <nav class="sidebar-nav">
-            <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
-                <i class="fas fa-home"></i> Dashboard
-            </a>
-            <a href="{{ url_for('admin_users') }}" class="nav-item active">
-                <i class="fas fa-users"></i> Manage Users
-            </a>
-            <a href="{{ url_for('admin_add_user') }}" class="nav-item">
-                <i class="fas fa-user-plus"></i> Add User
-            </a>
-            <a href="{{ url_for('admin_content') }}" class="nav-item">
-                <i class="fas fa-edit"></i> Edit Homepage
-            </a>
-            <a href="{{ url_for('profile') }}" class="nav-item">
-                <i class="fas fa-user-edit"></i> My Profile
-            </a>
-            <a href="{{ url_for('logout') }}" class="nav-item" data-confirm="Are you sure you want to logout?" data-title="Logout">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </nav>
+<div style="width: 100%; padding: 20px;">
+    <div style="margin-bottom: 30px;">
+        <h1 style="margin: 0 0 10px 0; color: #333;">Manage Users</h1>
+        <p style="margin: 0; color: #666;">View, edit, and manage all user accounts.</p>
     </div>
-    
-    <div class="dashboard-main">
-        <div class="dashboard-header">
-            <h1><i class="fas fa-users"></i> Manage Users</h1>
-            <p>View, edit, and manage all user accounts.</p>
-        </div>
-        
-        <div class="action-bar">
-            <a href="{{ url_for('admin_add_user') }}" class="btn btn-primary">
-                <i class="fas fa-user-plus"></i> Add New User
-            </a>
-        </div>
-        
-        <div class="users-table-section">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for u in users %}
-                    <tr>
-                        <td>{{ u.id }}</td>
-                        <td>{{ u.username }}</td>
-                        <td>{{ u.firstname }} {{ u.middlename or '' }} {{ u.lastname }}</td>
-                        <td>{{ u.email }}</td>
-                        <td>{{ u.contact }}</td>
-                        <td>
-                            <span class="badge {% if u.role == 'admin' %}badge-admin{% else %}badge-user{% endif %}">
-                                {{ u.role|capitalize }}
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge {% if u.is_active %}badge-active{% else %}badge-inactive{% endif %}">
-                                {% if u.is_active %}Active{% else %}Inactive{% endif %}
-                            </span>
-                        </td>
-                        <td class="action-buttons">
-                            <a href="{{ url_for('admin_edit_user', user_id=u.id) }}" class="btn btn-xs btn-edit" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="{{ url_for('admin_toggle_user', user_id=u.id) }}" 
-                               class="btn btn-xs {% if u.is_active %}btn-warning{% else %}btn-success{% endif %}"
-                               title="{% if u.is_active %}Deactivate{% else %}Activate{% endif %}"
-                               data-confirm="{% if u.is_active %}Deactivate{% else %}Activate{% endif %} user '{{ u.username }}'?"
-                               data-title="{% if u.is_active %}Deactivate{% else %}Activate{% endif %} User"
-                               data-btn-class="{% if u.is_active %}btn-warning{% else %}btn-success{% endif %}">
-                                <i class="fas {% if u.is_active %}fa-user-slash{% else %}fa-user-check{% endif %}"></i>
-                            </a>
-                            <a href="{{ url_for('admin_delete_user', user_id=u.id) }}" 
-                               class="btn btn-xs btn-danger" title="Delete"
-                               data-confirm="Delete user '{{ u.username }}'? This cannot be undone!"
-                               data-title="Delete User"
-                               data-btn-class="btn-danger">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('admin_add_user') }}" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;">Add New User</a>
+    </div>
+
+    <div style="overflow-x: auto; background: white; border: 1px solid #ddd; border-radius: 4px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #f8f9fa; border-bottom: 2px solid #ddd;">
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">ID</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Username</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Full Name</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Email</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Contact</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Role</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Status</th>
+                    <th style="padding: 12px; text-align: left; font-weight: 600;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px;">{{ u.id }}</td>
+                    <td style="padding: 12px;">{{ u.username }}</td>
+                    <td style="padding: 12px;">{{ u.firstname }} {{ u.middlename or '' }} {{ u.lastname }}</td>
+                    <td style="padding: 12px;">{{ u.email }}</td>
+                    <td style="padding: 12px;">{{ u.contact }}</td>
+                    <td style="padding: 12px;">
+                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; {% if u.role == 'admin' %}background: #dc3545; color: white;{% else %}background: #28a745; color: white;{% endif %}">
+                            {{ u.role|capitalize }}
+                        </span>
+                    </td>
+                    <td style="padding: 12px;">
+                        <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; {% if u.is_active %}background: #28a745; color: white;{% else %}background: #6c757d; color: white;{% endif %}">
+                            {% if u.is_active %}Active{% else %}Inactive{% endif %}
+                        </span>
+                    </td>
+                    <td style="padding: 12px;">
+                        <a href="{{ url_for('admin_edit_user', user_id=u.id) }}" style="padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; margin-right: 5px;">Edit</a>
+                        <a href="{{ url_for('admin_toggle_user', user_id=u.id) }}"
+                           style="padding: 6px 12px; background: {% if u.is_active %}#ffc107{% else %}#28a745{% endif %}; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; margin-right: 5px;"
+                           onclick="return confirm('{% if u.is_active %}Deactivate{% else %}Activate{% endif %} user \'{{ u.username }}\'?')">
+                            {% if u.is_active %}Deactivate{% else %}Activate{% endif %}
+                        </a>
+                        <a href="{{ url_for('admin_delete_user', user_id=u.id) }}"
+                           style="padding: 6px 12px; background: #dc3545; color: white; text-decoration: none; border-radius: 4px; font-size: 12px;"
+                           onclick="return confirm('Delete user \'{{ u.username }}\'? This cannot be undone!')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

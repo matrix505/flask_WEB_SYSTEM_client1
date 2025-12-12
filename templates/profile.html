@@ -1,101 +1,56 @@
 {% extends 'base.html' %}
 
-{% block title %}My Profile{% endblock %}
+{% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<div class="dashboard-container">
-    <div class="dashboard-sidebar">
-        <div class="sidebar-header">
-            <i class="fas fa-user-circle fa-3x"></i>
-            <h3>{{ session.get('firstname') }}</h3>
-            <span class="badge {% if session.get('role') == 'admin' %}badge-admin{% else %}badge-user{% endif %}">
-                {{ session.get('role')|capitalize }}
-            </span>
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <h1 style="margin-bottom: 20px; color: #333;">Edit Profile</h1>
+
+    <form method="POST" action="{{ url_for('profile') }}" style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div style="flex: 1;">
+                <label for="firstname" style="display: block; margin-bottom: 5px; font-weight: bold;">First Name *</label>
+                <input type="text" id="firstname" name="firstname" value="{{ user.firstname }}" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div style="flex: 1;">
+                <label for="middlename" style="display: block; margin-bottom: 5px; font-weight: bold;">Middle Name</label>
+                <input type="text" id="middlename" name="middlename" value="{{ user.middlename or '' }}" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div style="flex: 1;">
+                <label for="lastname" style="display: block; margin-bottom: 5px; font-weight: bold;">Last Name *</label>
+                <input type="text" id="lastname" name="lastname" value="{{ user.lastname }}" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
         </div>
-        
-        <nav class="sidebar-nav">
-            {% if session.get('role') == 'admin' %}
-            <a href="{{ url_for('admin_dashboard') }}" class="nav-item">
-                <i class="fas fa-home"></i> Dashboard
-            </a>
-            <a href="{{ url_for('admin_users') }}" class="nav-item">
-                <i class="fas fa-users"></i> Manage Users
-            </a>
-             <a href="{{ url_for('admin_add_user') }}" class="nav-item">
-                <i class="fas fa-user-plus"></i> Add User
-            </a>
-            <a href="{{ url_for('admin_content') }}" class="nav-item">
-                <i class="fas fa-edit"></i> Edit Homepage
-            </a>
-            {% else %}
-            <a href="{{ url_for('user_dashboard') }}" class="nav-item">
-                <i class="fas fa-home"></i> Dashboard
-            </a>
-            {% endif %}
-            <a href="{{ url_for('profile') }}" class="nav-item active">
-                <i class="fas fa-user-edit"></i> My Profile
-            </a>
-           
-            <a href="{{ url_for('logout') }}" class="nav-item" data-confirm="Are you sure you want to logout?" data-title="Logout">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </nav>
-    </div>
-    
-    <div class="dashboard-main">
-        <div class="dashboard-header">
-            <h1><i class="fas fa-user-edit"></i> My Profile</h1>
-            <p>Update your personal information below.</p>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div style="flex: 1;">
+                <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email *</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div style="flex: 1;">
+                <label for="contact" style="display: block; margin-bottom: 5px; font-weight: bold;">Contact Number *</label>
+                <input type="text" id="contact" name="contact" value="{{ user.contact }}" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
         </div>
-        
-        <div class="profile-form-container">
-            <form method="POST" action="{{ url_for('profile') }}" class="profile-form" data-confirm="Save changes to your profile?" data-title="Update Profile">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="firstname"><i class="fas fa-user"></i> First Name *</label>
-                        <input type="text" id="firstname" name="firstname" value="{{ user.firstname }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="middlename"><i class="fas fa-user"></i> Middle Name</label>
-                        <input type="text" id="middlename" name="middlename" value="{{ user.middlename or '' }}">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="lastname"><i class="fas fa-user"></i> Last Name *</label>
-                        <input type="text" id="lastname" name="lastname" value="{{ user.lastname }}" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="email"><i class="fas fa-envelope"></i> Email *</label>
-                        <input type="email" id="email" name="email" value="{{ user.email }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contact"><i class="fas fa-phone"></i> Contact Number *</label>
-                        <input type="text" id="contact" name="contact" value="{{ user.contact }}" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="birthday"><i class="fas fa-calendar"></i> Birthday *</label>
-                        <input type="date" id="birthday" name="birthday" value="{{ user.birthday }}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label><i class="fas fa-at"></i> Username (cannot change)</label>
-                        <input type="text" value="{{ user.username }}" disabled>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Update Profile
-                </button>
-            </form>
+
+        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+            <div style="flex: 1;">
+                <label for="birthday" style="display: block; margin-bottom: 5px; font-weight: bold;">Birthday *</label>
+                <input type="date" id="birthday" name="birthday" value="{{ user.birthday }}" required style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+
+            <div style="flex: 1;">
+                <label style="display: block; margin-bottom: 5px; font-weight: bold;">Username</label>
+                <input type="text" value="{{ user.username }}" disabled style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; background: #f8f9fa;">
+            </div>
         </div>
-    </div>
+
+        <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Update Profile
+        </button>
+    </form>
 </div>
 {% endblock %}
