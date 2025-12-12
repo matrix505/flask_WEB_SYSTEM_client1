@@ -8,30 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-brand">
-            <a href="{{ url_for('index') }}">
-                My website
-            </a>
-        </div>
-        <button class="nav-toggle" onclick="toggleNav()">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-links" id="navLinks">
-            <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a>
+    <nav style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="{{ url_for('index') }}" style="font-weight: bold; text-decoration: none; color: #333;">My website</a>
+            <div style="display: flex; gap: 15px;">
+                <a href="{{ url_for('index') }}" style="text-decoration: none; color: #333;">Home</a>
 
-            {% if session.get('loggedIn') %}
-                {% if session.get('role') == 'admin' %}
-                    <a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                    <a href="{{ url_for('games') }}" class="nav-games-btn"><i class="fas fa-gamepad"></i> Games</a>
+                {% if session.get('loggedIn') %}
+                    {% if session.get('role') == 'admin' %}
+                        <a href="{{ url_for('admin_dashboard') }}" style="text-decoration: none; color: #333;">Dashboard</a>
+                        <a href="{{ url_for('games') }}" style="text-decoration: none; color: #333;">Games</a>
+                    {% else %}
+                        <a href="{{ url_for('user_dashboard') }}" style="text-decoration: none; color: #333;">Dashboard</a>
+                        <a href="{{ url_for('games') }}" style="text-decoration: none; color: #333;">Games</a>
+                    {% endif %}
                 {% else %}
-                    <a href="{{ url_for('user_dashboard') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                    <a href="{{ url_for('games') }}" class="nav-games-btn"><i class="fas fa-gamepad"></i> Games</a>
+                    <a href="{{ url_for('login') }}" style="text-decoration: none; color: #333;">Login</a>
+                    <a href="{{ url_for('register') }}" style="text-decoration: none; color: #333;">Register</a>
                 {% endif %}
-            {% else %}
-                <a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
-                <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Register</a>
-            {% endif %}
+            </div>
         </div>
     </nav>
 

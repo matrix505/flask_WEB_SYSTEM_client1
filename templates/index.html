@@ -3,54 +3,34 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div class="home-hero">
-    <div class="hero-content">
-        <h1 class="hero-title">{{ content.get('site_title', 'Welcome to my Website!') }}</h1>
-    </div>
-</div>
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h1>{{ content.get('site_title', 'Welcome to my Website!') }}</h1>
 
-<div class="home-main">
-    <div class="owner-card">
-        <div class="owner-image">
-            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture">
-        </div>
-        <h2 class="owner-name">{% if admin %}{{ admin.firstname }} {{ admin.lastname }}{% else %}Admin{% endif %}</h2>
-        <p class="owner-quote">"{{ content.get('tagline', 'Hello! I am a passionate developer.') }}"</p>
+    <div style="margin: 30px 0; padding: 20px; border: 1px solid #ddd; background: #f9f9f9;">
+        <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+        <h2>{% if admin %}{{ admin.firstname }} {{ admin.lastname }}{% else %}Admin{% endif %}</h2>
+        <p>{{ content.get('tagline', 'Hello! I am a passionate developer.') }}</p>
         {% if admin %}
-        <div class="owner-info">
-            <span><i class="fas fa-envelope"></i> {{ admin.email }}</span>
-            <span><i class="fas fa-birthday-cake"></i> {{ admin.birthday }}</span>
-        </div>
+        <p>Email: {{ admin.email }}</p>
+        <p>Birthday: {{ admin.birthday }}</p>
         {% endif %}
     </div>
-    
-    <div class="about-section">
-        <h3><i class="fas fa-user"></i> About Me</h3>
+
+    <div style="margin: 30px 0;">
+        <h3>About Me</h3>
         <p>{{ content.get('about_me', 'I enjoy learning new technologies and creating web applications.') }}</p>
     </div>
-    
-    <div class="dream-card">
-        <div class="dream-icon">
-            <i class="fas fa-rocket"></i>
-        </div>
-        <div class="dream-info">
-            <span class="dream-label">{{ content.get('dream_job_title', 'My Dream Job') }}</span>
-            <span class="dream-value">{{ content.get('dream_job_text', 'Full-Stack Web Developer!') }}</span>
-        </div>
+
+    <div style="margin: 30px 0;">
+        <h3>{{ content.get('dream_job_title', 'My Dream Job') }}</h3>
+        <p>{{ content.get('dream_job_text', 'Full-Stack Web Developer!') }}</p>
     </div>
-    
+
     {% if not session.get('loggedIn') %}
-    <div class="games-promo">
-        <div class="promo-icon">
-            <i class="fas fa-gamepad"></i>
-        </div>
-        <div class="promo-content">
-            <h3>Access my list of games!</h3>
-            <p>Register now to access our collection of fun and exciting games.</p>
-            <a href="{{ url_for('register') }}" class="btn btn-promo">
-                <i class="fas fa-user-plus"></i> Register now
-            </a>
-        </div>
+    <div style="margin: 30px 0; padding: 20px; border: 1px solid #ccc;">
+        <h3>Access my list of games!</h3>
+        <p>Register now to access our collection of fun and exciting games.</p>
+        <a href="{{ url_for('register') }}" style="display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">Register now</a>
     </div>
     {% endif %}
 </div>

@@ -3,36 +3,26 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-card-header">
-            <h1>Welcome Back</h1>
-            <p>Sign in to your account</p>
-        </div>
-        
-        <form method="POST" action="{{ url_for('login') }}" class="auth-form">
-            <div class="form-field">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter username" required>
-            </div>
-            
-            <div class="form-field">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter password" required>
-            </div>
-            
-            <button type="submit" class="auth-btn">
-                Sign In
-            </button>
-        </form>
-        
-        <div class="auth-divider">
-            <span>or</span>
-        </div>
-        
-        <div class="auth-link">
-            <p>Don't have an account? <a href="{{ url_for('register') }}">Create one</a></p>
-        </div>
+<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; background: #f9f9f9;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="margin: 0 0 10px 0;">Welcome Back</h1>
+        <p style="margin: 0; color: #666;">Sign in to your account</p>
     </div>
+
+    <form method="POST" action="{{ url_for('login') }}" style="margin-bottom: 20px;">
+        <div style="margin-bottom: 15px;">
+            <label for="username" style="display: block; margin-bottom: 5px; font-weight: bold;">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label for="password" style="display: block; margin-bottom: 5px; font-weight: bold;">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <button type="submit" style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">
+            Sign In
+        </button>
+    </form>
 </div>
 {% endblock %}

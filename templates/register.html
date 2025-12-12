@@ -3,98 +3,89 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card auth-card-wide">
-        <div class="auth-card-header">
-            <h1>Create Account</h1>
-            <p>Fill in your details to get started</p>
-        </div>
-        
-        <form method="POST" action="{{ url_for('register') }}" class="auth-form" id="registerForm">
-            <div class="form-section">
-                <h3 class="section-title">Personal Information</h3>
-                <div class="form-grid form-grid-3">
-                    <div class="form-field">
-                        <label for="firstname">First Name *</label>
-                        <input type="text" id="firstname" name="firstname" placeholder="Juan" required>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="middlename">Middle Name</label>
-                        <input type="text" id="middlename" name="middlename" placeholder="Santos">
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="lastname">Last Name *</label>
-                        <input type="text" id="lastname" name="lastname" placeholder="Dela Cruz" required>
-                    </div>
-                </div>
-                
-                <div class="form-grid form-grid-2">
-                    <div class="form-field">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" placeholder="juan@email.com" required>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="contact">Contact Number *</label>
-                        <input type="text" id="contact" name="contact" placeholder="09123456789" required>
-                    </div>
-                </div>
-                
-                <div class="form-grid form-grid-2">
-                    <div class="form-field">
-                        <label for="birthday">Birthday *</label>
-                        <input type="date" id="birthday" name="birthday" required>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="username">Username *</label>
-                        <input type="text" id="username" name="username" placeholder="juandelacruz" required>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-section">
-                <h3 class="section-title">Security</h3>
-                <div class="form-grid form-grid-2">
-                    <div class="form-field">
-                        <label for="password">Password *</label>
-                        <input type="password" id="password" name="password" placeholder="Min. 6 characters" required minlength="6">
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="confirm_password">Confirm Password *</label>
-                        <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required>
-                    </div>
-                </div>
-            </div>
-            
-            <button type="submit" class="auth-btn">
-                Create Account
-            </button>
-        </form>
-        
-        <div class="auth-divider">
-            <span>or</span>
-        </div>
-        
-        <div class="auth-link">
-            <p>Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p>
-        </div>
+<div style="max-width: 600px; margin: 30px auto; padding: 20px; border: 1px solid #ddd; background: #f9f9f9;">
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="margin: 0 0 10px 0;">Create Account</h1>
+        <p style="margin: 0; color: #666;">Fill in your details to get started</p>
     </div>
-</div>
+
+    <form method="POST" action="{{ url_for('register') }}" id="registerForm">
+        <div style="margin-bottom: 30px;">
+            <h3 style="margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid #ddd;">Personal Information</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label for="firstname" style="display: block; margin-bottom: 5px; font-weight: bold;">First Name *</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Juan" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label for="middlename" style="display: block; margin-bottom: 5px; font-weight: bold;">Middle Name</label>
+                    <input type="text" id="middlename" name="middlename" placeholder="Santos" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label for="lastname" style="display: block; margin-bottom: 5px; font-weight: bold;">Last Name *</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Dela Cruz" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="juan@email.com" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label for="contact" style="display: block; margin-bottom: 5px; font-weight: bold;">Contact Number *</label>
+                    <input type="text" id="contact" name="contact" placeholder="09123456789" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div>
+                    <label for="birthday" style="display: block; margin-bottom: 5px; font-weight: bold;">Birthday *</label>
+                    <input type="date" id="birthday" name="birthday" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label for="username" style="display: block; margin-bottom: 5px; font-weight: bold;">Username *</label>
+                    <input type="text" id="username" name="username" placeholder="juandelacruz" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid #ddd;">Security</h3>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div>
+                    <label for="password" style="display: block; margin-bottom: 5px; font-weight: bold;">Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Min. 6 characters" required minlength="6" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div>
+                    <label for="confirm_password" style="display: block; margin-bottom: 5px; font-weight: bold;">Confirm Password *</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" style="width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-bottom: 20px;">
+            Create Account
+        </button>
+    </form>
 
 <script>
     document.getElementById('registerForm').addEventListener('submit', function(e) {
         var password = document.getElementById('password').value;
         var confirmPassword = document.getElementById('confirm_password').value;
-        
+
         if (password !== confirmPassword) {
             e.preventDefault();
             alert('Passwords do not match!');
         }
-        
+
         if (password.length < 6) {
             e.preventDefault();
             alert('Password must be at least 6 characters!');
