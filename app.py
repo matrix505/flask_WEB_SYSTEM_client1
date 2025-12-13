@@ -143,7 +143,7 @@ def register():
         models.save_pending_registration(username, password, email, firstname, 
                                          middlename, lastname, birthday, contact)
         
-   
+        # Generate and save OTP
         otp = generate_otp()
         models.save_otp(email, otp)
         models.log_email_sent(email)
@@ -159,7 +159,7 @@ def register():
     
     return render_template('register.html')
 
-@app.route('/verify_otp', methods=['GET', 'POST'])
+@app.route('/verify-otp', methods=['GET', 'POST'])
 def verify_otp():
     """OTP verification page"""
     if not session.get('pending_email'):
@@ -181,7 +181,7 @@ def verify_otp():
     
     return render_template('verify_otp.html', email=session.get('pending_email'))
 
-@app.route('/resend_otp')
+@app.route('/resend-otp')
 def resend_otp():
     """Resend OTP"""
     email = session.get('pending_email')
